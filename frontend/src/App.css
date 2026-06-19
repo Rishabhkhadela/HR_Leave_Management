@@ -6,7 +6,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
 
 /* ── CSS Variables ── */
+/* ── CSS Variables ── */
 :root {
+  color-scheme: dark;
+
   /* Colors */
   --bg-primary: #0f1117;
   --bg-secondary: #161923;
@@ -35,6 +38,12 @@
   --color-info: #3b82f6;
   --color-info-light: rgba(59, 130, 246, 0.15);
 
+  /* Translucents that adapt dynamically */
+  --bg-action-hover: rgba(255, 255, 255, 0.05);
+  --bg-user-card: rgba(255, 255, 255, 0.03);
+  --bg-progress-bar: rgba(255, 255, 255, 0.08);
+  --stroke-circle-bg: rgba(255, 255, 255, 0.06);
+
   /* Sizing */
   --sidebar-width: 260px;
   --radius-sm: 6px;
@@ -48,6 +57,50 @@
   --shadow-lg: 0 8px 30px rgba(0, 0, 0, 0.5);
   --shadow-glow: 0 0 20px rgba(99, 102, 241, 0.15);
 }
+
+html[data-theme="light"] {
+  color-scheme: light;
+
+  --bg-primary: #f8fafc;
+  --bg-secondary: #f1f5f9;
+  --bg-card: #ffffff;
+  --bg-card-hover: #f1f5f9;
+  --bg-input: #f1f5f9;
+  --bg-sidebar: #ffffff;
+
+  --text-primary: #0f172a;
+  --text-secondary: #475569;
+  --text-muted: #64748b;
+
+  --border-color: rgba(0, 0, 0, 0.08);
+  --border-light: rgba(0, 0, 0, 0.04);
+
+  --accent-primary: #4f46e5;
+  --accent-primary-hover: #4338ca;
+  --accent-primary-light: rgba(79, 70, 229, 0.1);
+
+  --color-success: #059669;
+  --color-success-light: rgba(5, 150, 105, 0.1);
+  --color-warning: #d97706;
+  --color-warning-light: rgba(217, 119, 6, 0.1);
+  --color-danger: #dc2626;
+  --color-danger-light: rgba(220, 38, 38, 0.1);
+  --color-info: #2563eb;
+  --color-info-light: rgba(37, 99, 235, 0.1);
+
+  /* Translucents that adapt dynamically */
+  --bg-action-hover: rgba(0, 0, 0, 0.04);
+  --bg-user-card: rgba(0, 0, 0, 0.02);
+  --bg-progress-bar: rgba(0, 0, 0, 0.08);
+  --stroke-circle-bg: rgba(0, 0, 0, 0.06);
+
+  /* Shadows adjusted for light theme */
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.05);
+  --shadow-lg: 0 8px 30px rgba(0, 0, 0, 0.08);
+  --shadow-glow: 0 0 20px rgba(79, 70, 229, 0.08);
+}
+
 
 /* ── Reset & Base ── */
 *,
@@ -350,7 +403,7 @@ body {
 
 .nav-link:hover {
   color: var(--text-primary);
-  background: rgba(255, 255, 255, 0.05);
+  background: var(--bg-action-hover);
 }
 
 .nav-link--active {
@@ -376,7 +429,7 @@ body {
   gap: 0.75rem;
   padding: 0.75rem;
   border-radius: var(--radius-md);
-  background: rgba(255, 255, 255, 0.03);
+  background: var(--bg-user-card);
   margin-bottom: 0.75rem;
 }
 
@@ -603,7 +656,7 @@ body {
 
 .progress-bar {
   height: 8px;
-  background: rgba(255, 255, 255, 0.08);
+  background: var(--bg-progress-bar);
   border-radius: 9999px;
   overflow: hidden;
   margin-bottom: 0.75rem;
@@ -691,7 +744,7 @@ body {
 
 .circle-bg {
   fill: none;
-  stroke: rgba(255, 255, 255, 0.06);
+  stroke: var(--stroke-circle-bg);
   stroke-width: 8;
 }
 
@@ -1350,3 +1403,54 @@ body {
     grid-template-columns: repeat(2, 1fr);
   }
 }
+
+/* ════════════════════════════════════════════════
+   THEME TOGGLE BUTTON
+   ════════════════════════════════════════════════ */
+.sidebar-footer-actions {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.sidebar-footer-actions .logout-btn {
+  flex: 1;
+}
+
+.theme-toggle-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-color);
+  background: var(--bg-card);
+  color: var(--text-primary);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 1.15rem;
+  padding: 0;
+}
+
+.theme-toggle-btn:hover {
+  background: var(--bg-card-hover);
+  border-color: var(--accent-primary);
+}
+
+.theme-toggle-btn:focus-visible {
+  outline: 2px solid var(--accent-primary);
+  outline-offset: 2px;
+}
+
+.floating-theme-toggle {
+  position: fixed;
+  top: 1.5rem;
+  right: 1.5rem;
+  z-index: 1000;
+}
+
+.floating-theme-toggle .theme-toggle-btn {
+  box-shadow: var(--shadow-md);
+}
+
