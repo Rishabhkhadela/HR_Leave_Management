@@ -289,8 +289,3 @@ cd backend
 python manage.py test
 ```
 
----
-
-## 📄 License
-
-This project is for educational / demonstration purposes.
