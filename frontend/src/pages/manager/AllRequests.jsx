@@ -30,7 +30,6 @@ export default function AllRequests() {
   }, [statusFilter]);
 
   const handleApprove = async (id) => {
-    if (!window.confirm('Approve this leave request?')) return;
     setApprovingId(id);
     try {
       await API.patch(`/leaves/approve/${id}/`);
